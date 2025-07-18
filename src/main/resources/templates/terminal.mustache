@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{>head-partial}}
+    <body class="has-navbar-fixed-top">
+        {{>header-partial}}
+        <section class="section terminal-output"></section>
+        <section class="section"></section>
+        <section class="section has-background-light terminal-input is-flex">
+            <input
+                id="terminal-input"
+                class="input mr-1"
+                type="text"
+                placeholder="SQL"
+            />
+            <button id="terminal-execute" class="button">
+                <span class="icon is-small">
+                    <span class="material-symbols-outlined">
+                        chevron_right
+                    </span>
+                </span>
+            </button>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{>head-partial}}
+    <body>
+        {{>header-partial}}
+        <section class="section container">
+            <h3 class="title">Login</h3>
+            <form method="post" action="/login">
+                <div class="field">
+                    <label class="label">
+                        Database
+                        <span> <a href="{{databaseListUri}}">Find</a> </span>
+                    </label>
+                    <div class="control">
+                        <input
+                            class="input"
+                            type="text"
+                            name="database"
+                            placeholder="database"
+                        />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <button
+                            class="button"
+                            type="submit"
+                            name="type"
+                            value="oauth2"
+                        >
+                            Login with PhoneSQL
+                        </button>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="username" class="label">Username</label>
+                    <div class="control">
+                        <input
+                            class="input"
+                            type="text"
+                            name="username"
+                            placeholder="username"
+                        />
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input
+                            class="input"
+                            type="text"
+                            name="password"
+                            placeholder="password"
+                        />
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <button
+                            class="button"
+                            type="submit"
+                            name="type"
+                            value="username_password"
+                        >
+                            Login with Username and Password
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </body>
+    {{>footer-partial}}
+</html>

@@ -1,0 +1,131 @@
+syntax = "proto3";
+
+package proto;
+
+enum ProxyMessageType {
+  PROXY_MESSAGE_TYPE_UNKNOWN = 0;
+  USERNAME_PASSWORD_LOGIN = 1;
+  OAUTH2_LOGIN = 2;
+  PARSE = 3;
+  QUERY = 4;
+  LOGOUT = 5;
+}
+
+message ProxyEnvelope {
+
+  int32 sequence_number = 1;
+  string session = 2;
+
+  repeated ProxyMessage messages = 3;
+}
+
+message ProxyMessage {
+  ProxyMessageType type = 1;
+
+  oneof message {
+    UsernamePasswordLogin username_password_login = 2;
+    OAuth2Login oauth2_login = 3;
+    Query query = 4;
+    Parse parse = 5;
+    Logout logout = 6;
+  }
+}
+
+enum PhoneMessageType {
+  PHONE_MESSAGE_TYPE_UNKNOWN = 0;
+  SIMPLE_REGISTRATION = 1;
+  OAUTH2_REGISTRATION = 2;
+  AUTHENTICATION = 3;
+  UNAUTHORIZED = 4;
+  PARSE_RESULT = 5;
+  RESULT_SET = 6;
+  ERROR = 7;
+}
+
+message PhoneEnvelope {
+
+  int32 sequence_number = 1;
+  string session = 2;
+
+  repeated PhoneMessage messages = 3;
+}
+
+message PhoneMessage {
+  PhoneMessageType type = 1;
+
+  oneof message {
+    SimpleRegistration simple_registration = 2;
+    OAuth2Registration oauth2_registration = 3;
+    Authentication authentication = 4;
+    Unauthorized unauthorized = 5;
+    ParseResult parse_result = 6;
+    ResultSet result_set = 7;
+    Error error = 8;
+    Close close = 9;
+  }
+}
+
+message SimpleRegistration {
+  repeated string databases = 1;
+}
+
+message OAuth2Registration {
+  string token = 1;
+  repeated string databases = 2;
+}
+
+message UsernamePasswordLogin {
+  string database = 1;
+  string username = 2;
+  string password = 3;
+}
+
+message OAuth2Login {
+  string database = 1;
+  string token = 2;
+}
+
+message Authentication {
+  string session = 1;
+  bool success = 2;
+}
+
+message Unauthorized {
+}
+
+message Parse {
+  string id = 1;
+  string sql = 2;
+}
+
+message ParseResult {
+  string id = 1;
+  repeated string columns = 2;
+}
+
+message Query {
+  string id = 1;
+  string sql = 2;
+  repeated string params = 3;
+}
+
+message Row {
+  repeated string columns = 1;
+}
+
+message ResultSet {
+  string id = 1;
+  repeated string columns = 2;
+  repeated Row rows = 3;
+}
+
+message Logout {
+}
+
+message Close {
+}
+
+message Error {
+  string code = 1;
+  string message = 2;
+}
